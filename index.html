@@ -36,7 +36,6 @@
             font-family: 'Syne', sans-serif;
         }
         
-        /* Subtle UI Grid blueprint background layer to indicate mobile layout canvas */
         .mobile-canvas {
             background-image: linear-gradient(rgba(255, 107, 0, 0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 107, 0, 0.015) 1px, transparent 1px);
             background-size: 24px 24px;
@@ -45,7 +44,6 @@
             background-image: linear-gradient(rgba(15, 23, 42, 0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, 0.012) 1px, transparent 1px);
         }
 
-        /* Glassmorphic cards */
         .glass-card {
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -60,7 +58,6 @@
             border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
-        /* Hover interaction architecture simulating active UI viewport container focus */
         .glass-card:hover {
             transform: translateY(-4px);
             border-color: rgba(255, 107, 0, 0.4);
@@ -80,7 +77,6 @@
             border-bottom: 1px solid rgba(0, 0, 0, 0.06);
         }
 
-        /* Symmetric structural borders dividing background matrix */
         .section-frame {
             position: relative;
             border: 1px solid rgba(0, 0, 0, 0.08);
@@ -89,7 +85,6 @@
             border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
-        /* Mobile interface corner bounds crosshairs simulating device wireframe blueprints */
         .section-frame::before, .section-frame::after {
             content: '';
             position: absolute;
@@ -99,7 +94,6 @@
             border-style: solid;
             pointer-events: none;
         }
-        /* Top-Left Safe-Area Guide Mark */
         .section-frame::before {
             top: -5px;
             left: -5px;
@@ -107,7 +101,6 @@
             border-top-color: #ff6b00;
             border-left-color: #ff6b00;
         }
-        /* Bottom-Right Safe-Area Guide Mark */
         .section-frame::after {
             bottom: -5px;
             right: -5px;
@@ -116,7 +109,6 @@
             border-right-color: #ff6b00;
         }
 
-        /* Fluid Typography text mask logic */
         .text-gradient {
             background: linear-gradient(135deg, #ffffff 30%, #ff6b00 100%);
             -webkit-background-clip: text;
@@ -132,7 +124,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Minimal scrollbar framework */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -151,7 +142,6 @@
             border-radius: 20px;
         }
 
-        /* Scroll-Driven Reveal Animation Architecture (Bi-directional Support) */
         .reveal-on-scroll {
             opacity: 0;
             transform: translateY(24px);
@@ -179,6 +169,7 @@
                 <a href="#skills" class="hover:text-accent transition-colors duration-200">Skills</a>
                 <a href="#experience" class="hover:text-accent transition-colors duration-200">Journey</a>
                 <a href="#projects" class="hover:text-accent transition-colors duration-200">Projects</a>
+                <a href="#github" class="hover:text-accent transition-colors duration-200">Open Source</a>
                 <a href="#education" class="hover:text-accent transition-colors duration-200">Education</a>
             </div>
 
@@ -490,6 +481,31 @@
             </div>
         </section>
 
+        <section id="github" class="section-frame reveal-on-scroll bg-slate-50 dark:bg-[#030303] rounded-3xl p-6 sm:p-12 space-y-12 text-left">
+            <div class="space-y-2">
+                <p class="text-xs font-bold uppercase tracking-widest text-accent">Open Source</p>
+                <h2 class="text-2xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tighter uppercase">GitHub Contributions</h2>
+                <div class="h-[2px] w-16 bg-accent"></div>
+            </div>
+            
+            <div class="glass-card p-6 sm:p-8 rounded-2xl space-y-4 reveal-on-scroll">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white uppercase tracking-tight">Flutter Skeleton Bloc Clean</h3>
+                    <a href="https://github.com/karanm4797/flutter_skeleton_bloc_clean" target="_blank" class="text-accent hover:text-white transition-colors duration-200">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                </div>
+                <p class="text-sm text-slate-600 dark:text-slate-300 text-justify font-light leading-relaxed">
+                    A clean architecture skeleton for Flutter applications utilizing the BLoC pattern. Designed to provide a robust, maintainable, and scalable foundation for new mobile projects.
+                </p>
+                <div class="pt-4">
+                    <a href="https://github.com/karanm4797/flutter_skeleton_bloc_clean" target="_blank" class="inline-block px-5 py-2.5 bg-accent text-white text-xs font-semibold uppercase tracking-widest rounded-xl hover:bg-white hover:text-black transition-all duration-300">
+                        View Repository
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <section id="education" class="section-frame reveal-on-scroll bg-slate-50 dark:bg-[#030303] rounded-3xl p-6 sm:p-12 space-y-12 text-left">
             <div class="space-y-2">
                 <p class="text-xs font-bold uppercase tracking-widest text-accent">Degrees</p>
@@ -541,10 +557,8 @@
     </main>
 
     <script>
-        // Mount Lucide Icons Instance
         lucide.createIcons();
 
-        // Theme Toggle Persistence Engine
         const themeToggleBtn = document.getElementById('theme-toggle');
         const htmlElement = document.documentElement;
 
@@ -560,7 +574,6 @@
             }
         });
 
-        // Intersection Observer Core Logic for Scroll-Driven Revelations (Bi-directional)
         const observerOptions = {
             root: null, 
             rootMargin: '0px 0px -40px 0px', 
