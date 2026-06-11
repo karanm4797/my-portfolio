@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karan Mehta | Senior Mobile Applications Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        accent: {
+                            DEFAULT: '#ff6b00',
+                            glow: 'rgba(255,107,0,0.15)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Syne', sans-serif;
+        }
+        
+        /* Subtle UI Grid blueprint background layer to indicate mobile layout canvas */
+        .mobile-canvas {
+            background-image: linear-gradient(rgba(255, 107, 0, 0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 107, 0, 0.015) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .light .mobile-canvas {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, 0.012) 1px, transparent 1px);
+        }
+
+        /* Glassmorphic cards */
+        .glass-card {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .dark .glass-card {
+            background: rgba(15, 15, 15, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .light .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /* Hover interaction architecture simulating active UI viewport container focus */
+        .glass-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 107, 0, 0.4);
+            box-shadow: 0 12px 30px -10px rgba(255,107,0,0.12);
+        }
+
+        .glass-nav {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .dark .glass-nav {
+            background: rgba(3, 3, 3, 0.85);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .light .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        /* Symmetric structural borders dividing background matrix */
+        .section-frame {
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        .dark .section-frame {
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        /* Mobile interface corner bounds crosshairs simulating device wireframe blueprints */
+        .section-frame::before, .section-frame::after {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-color: transparent;
+            border-style: solid;
+            pointer-events: none;
+        }
+        /* Top-Left Safe-Area Guide Mark */
+        .section-frame::before {
+            top: -5px;
+            left: -5px;
+            border-width: 2px 0 0 2px;
+            border-top-color: #ff6b00;
+            border-left-color: #ff6b00;
+        }
+        /* Bottom-Right Safe-Area Guide Mark */
+        .section-frame::after {
+            bottom: -5px;
+            right: -5px;
+            border-width: 0 2px 2px 0;
+            border-bottom-color: #ff6b00;
+            border-right-color: #ff6b00;
+        }
+
+        /* Fluid Typography text mask logic */
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 30%, #ff6b00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .light .text-gradient {
+            background: linear-gradient(135deg, #0f172a 30%, #ff6b00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Minimal scrollbar framework */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #1a1a1a;
+            border-radius: 20px;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #ff6b00;
+        }
+        .light ::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 20px;
+        }
+
+        /* Scroll-Driven Reveal Animation Architecture (Bi-directional Support) */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(24px);
+            will-change: transform, opacity;
+            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .reveal-on-scroll.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-[#030303] dark:text-slate-200 min-h-screen selection:bg-[#ff6b00]/30 overflow-x-hidden mobile-canvas">
+
+    <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#ff6b00]/[0.02] dark:bg-[#ff6b00]/[0.03] rounded-full blur-[120px] pointer-events-none z-0"></div>
+
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold tracking-tighter text-slate-900 dark:text-white font-display uppercase tracking-widest">
+                <span class="text-slate-400 dark:text-neutral-600 font-light">&lt;</span>KM<span class="text-accent">/</span><span class="text-slate-400 dark:text-neutral-600 font-light">&gt;</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-10 text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400">
+                <a href="#about" class="hover:text-accent transition-colors duration-200">About</a>
+                <a href="#skills" class="hover:text-accent transition-colors duration-200">Skills</a>
+                <a href="#experience" class="hover:text-accent transition-colors duration-200">Journey</a>
+                <a href="#projects" class="hover:text-accent transition-colors duration-200">Projects</a>
+                <a href="#education" class="hover:text-accent transition-colors duration-200">Education</a>
+            </div>
+
+            <div class="flex items-center gap-4 z-10">
+                <button id="theme-toggle" class="p-3 rounded-xl glass-card text-slate-700 dark:text-slate-300 hover:bg-slate-200/50 dark:hover:bg-white/5 transition-all" aria-label="Toggle Web Theme">
+                    <i data-lucide="moon" class="w-4 h-4 dark:hidden"></i>
+                    <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+                </button>
+                <a href="mailto:karanmehta4797@gmail.com" class="bg-slate-900 text-white dark:bg-white dark:text-black text-xs font-semibold uppercase tracking-widest px-6 py-3.5 rounded-xl hover:bg-accent dark:hover:bg-accent dark:hover:text-white hover:text-white transition-all duration-300 flex items-center gap-2">
+                    Let's Connect <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-24 space-y-14 pb-16">
+        
+        <section id="about" class="section-frame reveal-on-scroll bg-slate-50 dark:bg-[#030303] rounded-3xl p-6 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mt-8">
+            <div class="lg:col-span-7 space-y-8 text-left flex flex-col items-start justify-center">
+                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-xl glass-card text-xs font-semibold text-accent tracking-widest uppercase">
+                    <span class="w-2 h-2 rounded-full bg-accent animate-ping"></span> Available for Mobile App Developer Roles
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tighter text-slate-900 dark:text-white leading-[0.95]">
+                    Hi, I'm <br><span class="text-gradient">Karan Mehta</span>
+                </h1>
+                <p class="text-lg text-slate-600 dark:text-slate-400 font-medium tracking-tight">Sr. Mobile App Developer</p>
+                <p class="text-slate-700 dark:text-slate-300 leading-relaxed text-base bg-slate-100/40 dark:bg-[#0c0c0c]/40 p-6 rounded-2xl border border-slate-200/60 dark:border-white/[0.02] text-justify font-light max-w-3xl tracking-widest">
+                    I'm a senior software engineer specializing in the design and development of high-quality mobile applications. Leveraging Flutter and modern engineering principles, I build scalable, performant, and user-centric products with a strong emphasis on clean architecture and long-term maintainability. I thrive on solving complex problems, embracing new technologies, and delivering digital experiences that are both elegant and impactful.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-2 justify-start">
+                    <a href="https://www.linkedin.com/in/karan-mehta-a40369125/" target="_blank" class="p-4 rounded-xl glass-card text-slate-600 dark:text-slate-300 hover:text-accent dark:hover:text-accent flex items-center justify-center w-12 h-12" aria-label="LinkedIn Profile">
+                        <i class="fab fa-linkedin-in text-lg"></i>
+                    </a>
+                    <a href="mailto:karanmehta4797@gmail.com" class="p-4 rounded-xl glass-card text-slate-600 dark:text-slate-300 hover:text-accent dark:hover:text-accent flex items-center justify-center w-12 h-12" aria-label="Email Contact">
+                        <i class="fas fa-envelope text-lg"></i>
+                    </a>
+                    <a href="tel:+919638325353" class="p-4 rounded-xl glass-card text-slate-600 dark:text-slate-300 hover:text-accent dark:hover:text-accent flex items-center justify-center w-12 h-12" aria-label="Phone Line">
+                        <i class="fas fa-phone text-lg"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-5 flex justify-center lg:justify-end">
+                <div class="w-full max-w-sm h-96 glass-card rounded-[2.75rem] relative flex items-center justify-center group overflow-hidden border border-slate-200/80 dark:border-white/10 bg-slate-100/50 dark:bg-[#0c0c0c]/40 transition-all duration-500 hover:border-accent/40 hover:shadow-[0_0_40px_rgba(255,107,0,0.08)]">
+                    
+                    <img src="IMG_6459.jpg" alt="Karan Mehta" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 object-[center_38%]">
+                    
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
+
+                    <div class="absolute bottom-6 left-6 right-6 text-center z-10 bg-[#030303]/50 backdrop-blur-md p-4 rounded-2xl border border-white/5">
+                        <div class="text-3xl font-extrabold text-white font-display tracking-tighter">7+ <span class="text-accent text-xl">YRS</span></div>
+                        <div class="text-[9px] uppercase tracking-widest text-slate-300 font-bold mt-0.5">Mobile Engineering Expertise</div>
+                    </div>
+
+                    <div class="absolute top-8 left-6 w-3 h-3 border-t border-l border-white/20 pointer-events-none"></div>
+                    <div class="absolute top-8 right-6 w-3 h-3 border-t border-r border-white/20 pointer-events-none"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section-frame reveal-on-scroll bg-slate-50 dark:bg-[#030303] rounded-3xl p-6 sm:p-12 space-y-12 text-left">
+            <div class="space-y-2">
+                <p class="text-xs font-bold uppercase tracking-widest text-accent">Capabilities</p>
+                <h2 class="text-2xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tighter uppercase">Skills</h2>
+                <div class="h-[2px] w-16 bg-accent"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="glass-card p-6 sm:p-8 rounded-2xl space-y-6 reveal-on-scroll">
+                    <div class="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent text-xl">
+                        📱
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white uppercase tracking-tight">Mobile Platforms</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Flutter</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Dart</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Android</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Kotlin</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">React Native</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 sm:p-8 rounded-2xl space-y-6 reveal-on-scroll">
+                    <div class="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent text-xl">
+                        🏗️
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white uppercase tracking-tight">Architecture & State</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">BLoC</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">GetX</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Clean Arch.</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">MVVM</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 sm:p-8 rounded-2xl space-y-6 reveal-on-scroll">
+                    <div class="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent text-xl">
+                        🔌
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white uppercase tracking-tight">APIs & Backend</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">RESTful APIs</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Firebase</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Dio</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Hive DB</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Cloud Services</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 sm:p-8 rounded-2xl space-y-6 reveal-on-scroll">
+                    <div class="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent text-xl">
+                        ⚙️
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white uppercase tracking-tight">DevOps & Tools</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Git</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">CI/CD</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Jira</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Postman</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Agile/Scrum</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 sm:p-8 rounded-2xl space-y-6 reveal-on-scroll">
+                    <div class="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent text-xl">
+                        🚀
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white uppercase tracking-tight">Performance & Quality</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Optimization</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Unit Testing</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Widget Testing</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Code Review</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 sm:p-8 rounded-2xl space-y-6 reveal-on-scroll">
+                    <div class="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent text-xl">
+                        🤝
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white uppercase tracking-tight">Soft Skills</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Team Leadership</span>
+                        <span class="text-xs px-3 py-2 rounded-xl bg-slate-200/50 dark:bg-white/[0.03] text-slate-700 dark:text-slate-300 font-medium">Client Comms</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section-frame reveal-on-scroll bg-slate-50 dark:bg-[#030303] rounded-3xl p-6 sm:p-12 space-y-12 text-left">
+            <div class="space-y-2">
+                <p class="text-xs font-bold uppercase tracking-widest text-accent">Timeline</p>
+                <h2 class="text-2xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tighter uppercase">Professional Track</h2>
+                <div class="h-[2px] w-16 bg-accent"></div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="glass-card p-6 sm:p-8 rounded-2xl grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-start reveal-on-scroll">
+                    <div class="lg:col-span-3 text-accent font-bold text-sm tracking-widest uppercase pt-1">Sep 2025 - Present</div>
+                    <div class="lg:col-span-9 space-y-3">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Senior Software Developer</h3>
+                        <p class="text-xs font-medium text-slate-500 dark:text-slate-400">IMS Nucleii &bull; Ahmedabad, India</p>
+                        <ul class="list-none space-y-2 text-sm text-slate-600 dark:text-slate-300 text-left font-light">
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Designing and developing custom healthcare mobile and tablet applications using Flutter for US-based clients.</li>
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Collaborating with cross-functional teams to analyze requirements, design solutions, and deliver enhancements across application modules.</li>
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Ensuring code quality, performance optimization, and adherence to best practices throughout the development lifecycle.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 sm:p-8 rounded-2xl grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-start reveal-on-scroll">
+                    <div class="lg:col-span-3 text-accent font-bold text-sm tracking-widest uppercase pt-1">Nov 2024 - Jul 2025</div>
+                    <div class="lg:col-span-9 space-y-3">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Industry Consultant</h3>
+                        <p class="text-xs font-medium text-slate-500 dark:text-slate-400">NTT Data &bull; Bangalore, India</p>
+                        <ul class="list-none space-y-2 text-sm text-slate-600 dark:text-slate-300 text-left font-light">
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Developed and enhanced enterprise-grade Flutter applications as part of large-scale custom software projects.</li>
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Worked in Agile/Scrum teams, contributing to sprint planning, estimations, and timely delivery.</li>
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Supported application maintenance, bug fixing, and performance improvements to meet quality standards.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 sm:p-8 rounded-2xl grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-start reveal-on-scroll">
+                    <div class="lg:col-span-3 text-accent font-bold text-sm tracking-widest uppercase pt-1">Feb 2024 - Nov 2024</div>
+                    <div class="lg:col-span-9 space-y-3">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Sr. Flutter Developer</h3>
+                        <p class="text-xs font-medium text-slate-500 dark:text-slate-400">Vedlogic Solutions &bull; Ahmedabad, India</p>
+                        <ul class="list-none space-y-2 text-sm text-slate-600 dark:text-slate-300 text-left font-light">
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Developed and enhanced custom Flutter application features to improve usability and performance.</li>
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Actively participated in design discussions, code reviews, and troubleshooting.</li>
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Collaborated directly with US-based clients, ensuring alignment with business and technical requirements.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 sm:p-8 rounded-2xl grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-start reveal-on-scroll">
+                    <div class="lg:col-span-3 text-accent font-bold text-sm tracking-widest uppercase pt-1">Aug 2022 - Feb 2024</div>
+                    <div class="lg:col-span-9 space-y-3">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Sr. Mobile App Developer</h3>
+                        <p class="text-xs font-medium text-slate-500 dark:text-slate-400">Yudiz Solutions &bull; Ahmedabad, India</p>
+                        <ul class="list-none space-y-2 text-sm text-slate-600 dark:text-slate-300 text-left font-light">
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Contributed to multiple Android and Flutter custom applications across different domains.</li>
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Handled client communication, requirement analysis, and solution implementation.</li>
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Improved BLE scanning performance by 30% through code optimization and architectural improvements.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 sm:p-8 rounded-2xl grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-start reveal-on-scroll">
+                    <div class="lg:col-span-3 text-accent font-bold text-sm tracking-widest uppercase pt-1">Oct 2021 - Jul 2022</div>
+                    <div class="lg:col-span-9 space-y-3">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Software Engineer</h3>
+                        <p class="text-xs font-medium text-slate-500 dark:text-slate-400">Intelivita &bull; Ahmedabad, India</p>
+                        <ul class="list-none space-y-2 text-sm text-slate-600 dark:text-slate-300 text-left font-light">
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Built 5+ mobile applications from scratch using Flutter and Android following SDLC best practices.</li>
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Played a key role in application architecture, development, testing, and deployment.</li>
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Demonstrated leadership by mentoring and leading a team of 4 developers.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 sm:p-8 rounded-2xl grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-start reveal-on-scroll">
+                    <div class="lg:col-span-3 text-accent font-bold text-sm tracking-widest uppercase pt-1">Dec 2018 - Oct 2021</div>
+                    <div class="lg:col-span-9 space-y-3">
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">Software Engineer</h3>
+                        <p class="text-xs font-medium text-slate-500 dark:text-slate-400">Synoverge Technologies &bull; Ahmedabad, India</p>
+                        <ul class="list-none space-y-2 text-sm text-slate-600 dark:text-slate-300 text-left font-light">
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Gained strong expertise in Android and Flutter development through enterprise-level projects.</li>
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Contributed to the HDFC ERGO Insurance app with 500K+ users and 3.9 rating.</li>
+                            <li class="flex gap-2 items-start"><span class="text-accent mt-1.5">&#9642;</span> Enhanced legacy application performance by ~20% through refactoring and optimization.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section-frame reveal-on-scroll bg-slate-50 dark:bg-[#030303] rounded-3xl p-6 sm:p-12 space-y-12 text-left">
+            <div class="space-y-2">
+                <p class="text-xs font-bold uppercase tracking-widest text-accent">Works</p>
+                <h2 class="text-2xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tighter uppercase">Production Deployments</h2>
+                <div class="h-[2px] w-16 bg-accent"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass-card p-6 sm:p-8 rounded-2xl space-y-4 flex flex-col justify-between reveal-on-scroll">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white uppercase tracking-tight">Aries Trade</h3>
+                            <div class="w-10 h-10 rounded-xl bg-accent/5 flex items-center justify-center text-accent"><i data-lucide="trending-up" class="w-4 h-4"></i></div>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 text-justify font-light leading-relaxed">US-based stocks and derivatives trading application supporting real-time market data and transactions. Improved application performance by 20-30% through code refactoring, state management, and optimization.</p>
+                    </div>
+                    <div class="pt-2 flex flex-wrap gap-1.5">
+                        <span class="text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-md bg-slate-200/60 dark:bg-white/[0.03] text-slate-500 dark:text-slate-400">Flutter</span>
+                        <span class="text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-md bg-slate-200/60 dark:bg-white/[0.03] text-slate-500 dark:text-slate-400">Dart</span>
+                        <span class="text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-md bg-slate-200/60 dark:bg-white/[0.03] text-slate-500 dark:text-slate-400">GetX</span>
+                        <span class="text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-md bg-slate-200/60 dark:bg-white/[0.03] text-slate-500 dark:text-slate-400">REST APIs</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 sm:p-8 rounded-2xl space-y-4 flex flex-col justify-between reveal-on-scroll">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white uppercase tracking-tight">FunRegister 2.0</h3>
+                            <div class="w-10 h-10 rounded-xl bg-accent/5 flex items-center justify-center text-accent"><i data-lucide="activity" class="w-4 h-4"></i></div>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 text-justify font-light leading-relaxed">POS and inventory management system developed as a custom solution for a US client. Implemented reliable BLE barcode scanning and thermal printing, reducing scanning errors by ~50%.</p>
+                    </div>
+                    <div class="pt-2 flex flex-wrap gap-1.5">
+                        <span class="text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-md bg-slate-200/60 dark:bg-white/[0.03] text-slate-500 dark:text-slate-400">Flutter</span>
+                        <span class="text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-md bg-slate-200/60 dark:bg-white/[0.03] text-slate-500 dark:text-slate-400">GetX</span>
+                        <span class="text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-md bg-slate-200/60 dark:bg-white/[0.03] text-slate-500 dark:text-slate-400">Firebase Firestore</span>
+                        <span class="text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-md bg-slate-200/60 dark:bg-white/[0.03] text-slate-500 dark:text-slate-400">BLE</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 sm:p-8 rounded-2xl space-y-4 flex flex-col justify-between reveal-on-scroll">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white uppercase tracking-tight">HDFC ERGO App</h3>
+                            <div class="w-10 h-10 rounded-xl bg-accent/5 flex items-center justify-center text-accent"><i data-lucide="shield-check" class="w-4 h-4"></i></div>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 text-justify font-light leading-relaxed">Enterprise-scale insurance application with 500K+ downloads. Improved legacy app efficiency by ~20% and integrated My Health Services module including tele-clinic, ambulance, pharmacy, and fitness services.</p>
+                    </div>
+                    <div class="pt-2 flex flex-wrap gap-1.5">
+                        <span class="text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-md bg-slate-200/60 dark:bg-white/[0.03] text-slate-500 dark:text-slate-400">Android</span>
+                        <span class="text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-md bg-slate-200/60 dark:bg-white/[0.03] text-slate-500 dark:text-slate-400">Kotlin</span>
+                        <span class="text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-md bg-slate-200/60 dark:bg-white/[0.03] text-slate-500 dark:text-slate-400">Java</span>
+                        <span class="text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-md bg-slate-200/60 dark:bg-white/[0.03] text-slate-500 dark:text-slate-400">Google Fit</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 sm:p-8 rounded-2xl space-y-4 flex flex-col justify-between reveal-on-scroll">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white uppercase tracking-tight">Talent Base</h3>
+                            <div class="w-10 h-10 rounded-xl bg-accent/5 flex items-center justify-center text-accent"><i data-lucide="users" class="w-4 h-4"></i></div>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 text-justify font-light leading-relaxed">Chef booking and client discovery application for a UK-based client. Built dual-role applications with booking, profile management, event handling, and reviews. Led a team of 4 developers.</p>
+                    </div>
+                    <div class="pt-2 flex flex-wrap gap-1.5">
+                        <span class="text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-md bg-slate-200/60 dark:bg-white/[0.03] text-slate-500 dark:text-slate-400">Android</span>
+                        <span class="text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-md bg-slate-200/60 dark:bg-white/[0.03] text-slate-500 dark:text-slate-400">Kotlin</span>
+                        <span class="text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-md bg-slate-200/60 dark:bg-white/[0.03] text-slate-500 dark:text-slate-400">Java</span>
+                        <span class="text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-md bg-slate-200/60 dark:bg-white/[0.03] text-slate-500 dark:text-slate-400">REST APIs</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="section-frame reveal-on-scroll bg-slate-50 dark:bg-[#030303] rounded-3xl p-6 sm:p-12 space-y-12 text-left">
+            <div class="space-y-2">
+                <p class="text-xs font-bold uppercase tracking-widest text-accent">Degrees</p>
+                <h2 class="text-2xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tighter uppercase">Academic Background</h2>
+                <div class="h-[2px] w-16 bg-accent"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="glass-card p-6 sm:p-8 rounded-2xl space-y-3 reveal-on-scroll">
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg uppercase tracking-tight">Master of Computer Applications</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">L.D. College of Engineering, Ahmedabad</p>
+                        </div>
+                        <span class="text-xs px-3 py-1.5 rounded-xl bg-accent/10 text-accent font-semibold tracking-wider font-display whitespace-nowrap">2017 - 2019</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 sm:p-8 rounded-2xl space-y-3 reveal-on-scroll">
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h4 class="font-bold text-slate-900 dark:text-white text-base sm:text-lg uppercase tracking-tight">Bachelor of Computer Applications</h4>
+                            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">H.J. Doshi I.T. Institute, Jamnagar</p>
+                        </div>
+                        <span class="text-xs px-3 py-1.5 rounded-xl bg-accent/10 text-accent font-semibold tracking-wider font-display whitespace-nowrap">2014 - 2017</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer id="contact" class="section-frame reveal-on-scroll bg-slate-50 dark:bg-[#030303] rounded-3xl p-6 sm:p-12 text-left">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <h3 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white uppercase tracking-tighter">Initiate a Project</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 text-justify max-w-sm font-light leading-relaxed">Looking for an experienced engineer to design scalable app foundations or optimize core systems? Let's connect.</p>
+                </div>
+                <div class="glass-card p-6 sm:p-8 rounded-2xl space-y-4 md:justify-self-end w-full max-w-md">
+                    <div class="text-sm space-y-3 text-slate-600 dark:text-slate-300 font-light">
+                        <div class="flex items-center gap-4"><i data-lucide="mail" class="w-4 h-4 text-accent"></i> karanmehta4797@gmail.com</div>
+                        <div class="flex items-center gap-4"><i data-lucide="phone" class="w-4 h-4 text-accent"></i> +91 9638325353</div>
+                        <div class="flex items-center gap-4"><i data-lucide="map-pin" class="w-4 h-4 text-accent"></i> Ahmedabad, Gujarat, India</div>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-8 mt-8 border-t border-slate-200 dark:border-white/[0.03] text-center text-xs text-slate-400 font-light">
+                &copy; 2026 Karan Mehta. All rights reserved.
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Mount Lucide Icons Instance
+        lucide.createIcons();
+
+        // Theme Toggle Persistence Engine
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Intersection Observer Core Logic for Scroll-Driven Revelations (Bi-directional)
+        const observerOptions = {
+            root: null, 
+            rootMargin: '0px 0px -40px 0px', 
+            threshold: 0.12 
+        };
+
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        };
+
+        const scrollObserver = new IntersectionObserver(revealCallback, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const architecturalNodes = document.querySelectorAll('.reveal-on-scroll');
+            architecturalNodes.forEach(node => scrollObserver.observe(node));
+        });
+    </script>
+</body>
+</html>
